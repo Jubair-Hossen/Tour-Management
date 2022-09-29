@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 const tourSchema = mongoose.Schema({
-    tittle: {
+    title: {
         type: String,
         required: [true, 'Tour tittle is required'],
         trim: true,
@@ -26,30 +26,41 @@ const tourSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    breakfast: {
-        type: String,
-        enum: {
-            values: ['include', 'not include'],
-            message: "can be 'include' or 'not include'"
-        }
-    },
-    lunch: {
-        type: String,
-        enum: {
-            values: ['include', 'not include'],
-            message: "can be 'include' or 'not include'"
-        }
-    },
-    dinner: {
-        type: String,
-        enum: {
-            values: ['include', 'not include'],
-            message: "can be 'include' or 'not include' only"
+    meals: {
+        breakfast: {
+            type: String,
+            enum: {
+                values: ['include', 'not include'],
+                message: "can be 'include' or 'not include'"
+            },
+            required: true
+        },
+        lunch: {
+            type: String,
+            enum: {
+                values: ['include', 'not include'],
+                message: "can be 'include' or 'not include'"
+            },
+            required: true
+        },
+        dinner: {
+            type: String,
+            enum: {
+                values: ['include', 'not include'],
+                message: "can be 'include' or 'not include' only"
+            },
+            required: true
         }
     },
     duration: {
-        type: Number,
-        required: true,
+        days: {
+            type: Number,
+            required: true
+        },
+        night: {
+            type: Number,
+            required: true
+        }
     },
     status: {
         type: String,
