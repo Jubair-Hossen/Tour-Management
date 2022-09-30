@@ -3,7 +3,7 @@ require("dotenv").config();
 const PORT = process.env.PORT || 8000
 
 const server = app => {
-    mongoose.connect(process.env.DB_LOCAL).then(() => {
+    mongoose.connect(process.env.DB_ATLAS).then(() => {
         console.log('database connected');
     });
 
