@@ -4,8 +4,8 @@ const tourSchema = mongoose.Schema({
     title: {
         type: String,
         required: [true, 'Tour tittle is required'],
-        trim: true,
         unique: true,
+        trim: true,
         minLength: [4, 'name must be at least 4 characters'],
         maxLength: [150, 'name is to large']
     },

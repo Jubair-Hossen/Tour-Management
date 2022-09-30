@@ -12,4 +12,4 @@ const tourRoute = require('./routes/tour.routes');
 
 server(app);
 
-app.use('/api/v1/tour', tourRoute)
+app.use('/api/v1/tours', tourRoute)
