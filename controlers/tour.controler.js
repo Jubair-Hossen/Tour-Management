@@ -1,4 +1,5 @@
 const { query } = require("express");
+const { findById } = require("../models/Tour");
 const Tour = require("../models/Tour");
 const { getTourService } = require("../services/tourServices");
 
@@ -59,4 +60,19 @@ const createTour = async (req, res) => {
     }
 }
 
-module.exports = { getTour, createTour }
+const getTourById = async (req, res) => {
+    try {
+        const result = await Tour.findById(req.params.id);
+        res.status(200).json({
+            status: "success",
+            data: result
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "false",
+            data: error.message
+        })
+    }
+}
+
+module.exports = { getTour, createTour, getTourById }
