@@ -91,6 +91,21 @@ const getTrendingTour = async (req, res) => {
     }
 }
 
+const getCheapestTour = async (req, res) => {
+    try {
+        const result = await getTourService({}, { sort: "price", limit: 3 });
+        res.status(200).json({
+            status: "success",
+            data: result
+        })
+    } catch (error) {
+        res.status(400).json({
+            status: "false",
+            error: error.message
+        })
+    }
+}
+
 const updateATour = async (req, res) => {
     try {
         const doc = req.body;
@@ -108,4 +123,4 @@ const updateATour = async (req, res) => {
     }
 }
 
-module.exports = { getTour, createTour, getTourById, updateATour, getTrendingTour }
+module.exports = { getTour, createTour, getTourById, updateATour, getTrendingTour, getCheapestTour }
