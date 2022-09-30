@@ -1,7 +1,6 @@
 const { query } = require("express");
-const { findById } = require("../models/Tour");
 const Tour = require("../models/Tour");
-const { getTourService } = require("../services/tourServices");
+const { getTourService, getTourByIdService } = require("../services/tourServices");
 
 const getTour = async (req, res) => {
     try {
@@ -62,7 +61,9 @@ const createTour = async (req, res) => {
 
 const getTourById = async (req, res) => {
     try {
-        const result = await Tour.findById(req.params.id);
+        const id = req.params.id;
+        const result = await getTourByIdService(id);
+
         res.status(200).json({
             status: "success",
             data: result
@@ -70,9 +71,26 @@ const getTourById = async (req, res) => {
     } catch (error) {
         res.status(400).json({
             status: "false",
-            data: error.message
+            error: error.message
         })
     }
 }
 
-module.exports = { getTour, createTour, getTourById }
+const updateATour = async (req, res) => {
+    try {
+        const doc = req.body;
+        const filter = { _id: req.params.id };
+        const result = await Tour.updateOne(filter, doc, { runValidators: true });
+        res.status(200).json({
+            status: "success",
+            data: result
+        });
+    } catch (error) {
+        res.status(400).json({
+            status: "false",
+            error: error.message
+        });
+    }
+}
+
+module.exports = { getTour, createTour, getTourById, updateATour }

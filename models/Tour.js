@@ -72,6 +72,10 @@ const tourSchema = mongoose.Schema({
     "price": {
         type: Number,
         required: true
+    },
+    viewCount: {
+        type: Number,
+        default: 0
     }
 }, { timestamps: true })
 

@@ -8,3 +8,13 @@ exports.getTourService = async (filters, queries) => {
         .sort(queries.sort)
     return result;
 }
+
+exports.getTourByIdService = async (id) => {
+    const result = await Tour.findById(id);
+
+    await Tour.updateOne({ _id: id },
+        { "viewCount": result.viewCount + 1 },
+        { runValidators: true }
+    )
+    return result;
+}
